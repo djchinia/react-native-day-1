@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
@@ -12,24 +12,25 @@ import {
 
 import { Post } from '../components/Post';
 import { Header } from '../components/Header';
+import { FirebaseWrapper } from '../firebase/firebase';
 
-export default function HomeScreen() {
+export default class HomeScreen extends Component {
+  constructor() {
+    this.state = {}
+  }
+
+  async componentDidMount() {
+    await FirebaseWrapper.GetInstance().SetupCollectionListener('posts', posts => this.setState({posts}))
+  }
+
+
   return (
     <View style={styles.container}>
       <Header text="Home" />
-      <ScrollView
-        style={styles.container}>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+      <ScrollView style={styles.container}>
+        {this.state.posts && this.state.posts.map}
+        <Post  key={post.id}/>
       </ScrollView>
-
     </View>
   );
 }
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     margin: 0,
-    padding: 0
+    padding: 0,
   },
   developmentModeText: {
     marginBottom: 20,

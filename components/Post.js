@@ -8,7 +8,11 @@ export function Post(props) {
       <View style={styles.container}>
         <Image
           style={{ width: 50, height: 50, borderRadius: 25 }}
-          source={{ uri: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/prince-1561086744.jpg?resize=320:*" }} />
+          source={{
+            uri:
+              'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/prince-1561086744.jpg?resize=320:*',
+          }}
+        />
 
         <View style={styles.dateUserContainer}>
           <Text style={styles.username}>Username</Text>
@@ -16,7 +20,7 @@ export function Post(props) {
         </View>
       </View>
 
-      <Text style={styles.postText}>Id eiusmod aliquip nulla reprehenderit. Sit nostrud ad ipsum magna tempor enim labore consequat ut. Occaecat do cupidatat velit elit do sit enim ut labore. </Text>
+      <Text style={styles.postText}>{props.postInfo.text} </Text>
     </View>
   );
 }
@@ -27,22 +31,21 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomColor: '#dadada',
     borderBottomWidth: 1,
-  }, 
+  },
   container: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   username: {
     fontSize: 18,
     fontWeight: 'bold',
   },
   dateUserContainer: {
-    marginLeft: 3
+    marginLeft: 3,
   },
   postText: {
     padding: 5,
-    fontSize: 15
-  }
-})
-
+    fontSize: 15,
+  },
+});

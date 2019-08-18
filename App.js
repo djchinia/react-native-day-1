@@ -6,9 +6,13 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+import { FirebaseWrapper } from './firebase/firebase';
+import { firebaseConfig } from './firebase/config';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+  FirebaseWrapper.GetInstance().Initialize(firebaseConfig);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
@@ -21,7 +25,7 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        <View style={{ backgroundColor: 'black', height: 20 }}></View>
+        <View style={{ backgroundColor: 'black', height: 20 }} />
         {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
         <AppNavigator />
       </View>
